@@ -1,0 +1,83 @@
+# A allowlist of folders to track for dotfiles.
+#
+# Here are some caveats of gitignore semantics:
+# 
+# Configure what gitignore file to use:
+#  
+# > dotfiles config --local core.excludesFile .gitignore_dotfiles
+#
+# Files in the ignored directory can't not be included again.
+#
+# Semantics of * 
+# =========================
+#
+# An asterisk "*" matches anything except a slash. The character "?" matches
+# any one character except "/". The range notation, e.g. [a-zA-Z], can be used
+# to match one of the characters in a range. See fnmatch(3) and the
+# FNM_PATHNAME flag for a more detailed description.
+#
+# Semantics of **
+# =========================
+#
+# Two consecutive asterisks ("**") in patterns matched against full pathname
+# may have special meaning:
+# 
+# A leading "**" followed by a slash means match in all directories. For
+# example, "**/foo" matches file or directory "foo" anywhere, the same as
+# pattern "foo". "**/foo/bar" matches file or directory "bar" anywhere that is
+# directly under directory "foo".
+# 
+# A trailing "/**" matches everything inside. For example, "abc/**" matches all
+# files inside directory "abc", relative to the location of the .gitignore
+# file, with infinite depth.
+# 
+# A slash followed by two consecutive asterisks then a slash matches zero or
+# more directories. For example, "a/**/b" matches "a/b", "a/x/b", "a/x/y/b" and
+# so on.
+# 
+# Other consecutive asterisks are considered regular asterisks and will match
+# according to the previous rules.
+# 
+# This command is handy to debug ignore files
+# 
+# > dotfiles check-ignore <path>
+
+
+# Ignore all directory and files. 
+/*
+
+# Include ignore file
+!.gitignore_dotfiles
+
+# Include README file
+!README.md
+
+# Ignore all folders in .config by default
+!/.config/
+/.config/*/
+
+# fish
+!/.config/fish/
+
+# kitty
+!/.config/kitty/
+/.config/kitty/*.bak
+
+# nvim
+!/.config/nvim/
+
+# yabai
+!/.yabairc
+
+# skhd
+!/.skhdrc
+
+# ideavim
+!/.ideavimrc
+
+# hammerspoon
+!/.hammerspoon/
+
+# Homebrew
+!Brewfile
+

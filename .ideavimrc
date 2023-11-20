@@ -1,0 +1,43 @@
+let mapleader=" "
+
+
+" Use gh to get quick doc
+nmap gh <Action>(QuickJavaDoc)
+nmap ge <Action>(GotoNextError)
+" Fix ctrl-o and ctrl-i behavior.
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" Make gq more vim-like.
+nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+vmap gq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+
+" Enable surround plugin
+set surround
+
+" Enable which-key plugin
+set which-key
+" Disable timeout to have the which-key window show up immeidately after <space>
+set notimeout
+
+" Key mappings
+
+" Key mappings - Window management
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fs :action GotoSymbol<CR>
+nnoremap <leader>wO :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <leader>ws :action SplitHorizontally<CR>
+nnoremap <leader>wv :action SplitVertically<CR>
+nnoremap <leader>ww :action NextSplitter<CR>
+nnoremap <leader>wx :action CloseAllEditors<CR>
+
+" Key mappings - dotfiles
+nnoremap <leader>ss :source ~/.ideavimrc<CR>
+
+" Unfortunately ideavim doesn't support :e command.
+" nnoremap <leader>se :action EditorOpenFile ~/.ideavimrc<CR>
+
+" Description for which key. The syntax is:
+" letg:WhichKeyDesc_<foo> = <keybinding> <description
+let g:WhichKeyDesc_windows = "<leader>w Windows"
+let g:WhichKeyDesc_sources = "<leader>w .ideavimrc"
