@@ -24,7 +24,7 @@ Clone dotfiles repo to $HOME:
 
 ```
 # Clone the bare repo.
-git clone --bare git@github.com:zhangfand/dotfiles.git $HOME/.dotfiles.git
+git clone --bare https://github.com/zhangfand/dotfiles.git $HOME/.dotfiles.git
 # Checkout the actual content from the bare repo.
 git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME checkout
 # Configure the local repo to use the specific ignore file.
