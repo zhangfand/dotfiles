@@ -22,10 +22,11 @@ local plugins = {
     "folke/tokyonight.nvim",
 }
 
-vim.cmd("colorscheme tokyonight")
-
 local opts = { }
 require("lazy").setup(plugins, opts)
+
+vim.cmd("colorscheme tokyonight")
+
 
 -- lsp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
