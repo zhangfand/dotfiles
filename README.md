@@ -10,6 +10,8 @@ Apps and command line tools are managed by homebrew.
 Install
 =========
 
+TL;DR: curl -LKs https://gist.githubusercontent.com/zhangfand/12f242aff1bf3d1d0906b7472c1c137b/raw/aae5c3687dfe4fab67a8ef1d57f0cc933b30c06f/bootstrap.sh | /bin/bash
+
 The following steps need to be performed manually to bootstap the 
 setup.
 
@@ -49,6 +51,4 @@ chsh -s '/opt/homebrew/bin/fish'
 
 Restart the terminal and fish should be the default shell. Alias `dotfiles`
 should be availableto manage dotfiles. 
-
-
 
