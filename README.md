@@ -25,8 +25,10 @@ Clone dotfiles repo to $HOME:
 ```
 # Clone the bare repo.
 git clone --bare https://github.com/zhangfand/dotfiles.git $HOME/.dotfiles.git
+
 # Checkout the actual content from the bare repo.
 git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME checkout
+
 # Configure the local repo to use the specific ignore file.
 git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME config --local core.excludesFile .gitignore_dotfiles
 ```
@@ -34,7 +36,7 @@ git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME config --local core.exclude
 Install clis and apps listed in Brewfile:
 
 ```
-brew bundle install
+/opt/homebrew/bin/brew bundle install
 ```
 
 Set fish shell to be the default shell.
