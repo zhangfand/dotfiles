@@ -1,0 +1,11 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Zhangfan Dong
+	email = dong.zhangfan@gmail.com
+[alias]
+	st = status
+	ci = commit
+	sw = switch
+	br = branch
+
