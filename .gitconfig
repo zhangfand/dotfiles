@@ -1,6 +1,4 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 	name = Zhangfan Dong
 	email = dong.zhangfan@gmail.com
 [alias]
@@ -8,4 +6,17 @@
 	ci = commit
 	sw = switch
 	br = branch
+[init]
+	defaultBranch = main
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true # use n and N to move diff sections
+	light = false
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 
