@@ -17,8 +17,6 @@ GNU Stow — creates symlinks from `$HOME` to files in the repo. Each "package" 
 | nvim       | `.config/nvim/` (entire tree)                 |
 | zed        | `.config/zed/` (settings, keymap, etc.)       |
 | ghostty    | `.config/ghostty/`                            |
-| kitty      | `.config/kitty/`                              |
-| iterm2     | `.config/iterm2/`                             |
 | starship   | `.config/starship.toml`                       |
 | gh         | `.config/gh/` (excluding `hosts.yml`)         |
 | claude     | `.claude/CLAUDE.md`, `.claude/settings.json`  |
@@ -43,12 +41,6 @@ dotfiles/
 ├── ghostty/
 │   └── .config/ghostty/
 │       └── config
-├── kitty/
-│   └── .config/kitty/
-│       └── (kitty config files)
-├── iterm2/
-│   └── .config/iterm2/
-│       └── (iterm2 config files)
 ├── starship/
 │   └── .config/starship.toml
 ├── gh/
@@ -74,7 +66,7 @@ set -euo pipefail
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$DOTFILES_DIR"
 
-packages=(zsh git nvim zed ghostty kitty iterm2 starship gh claude)
+packages=(zsh git nvim zed ghostty starship gh claude)
 
 for pkg in "${packages[@]}"; do
     echo "Stowing $pkg..."
