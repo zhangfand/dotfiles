@@ -1,0 +1,23 @@
+[user]
+	name = Zhangfan Dong
+	email = dong.zhangfan@gmail.com
+[alias]
+	st = status
+	ci = commit
+	sw = switch
+	br = branch
+	c  = checkout
+[init]
+	defaultBranch = main
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true # use n and N to move diff sections
+	light = false
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
+
