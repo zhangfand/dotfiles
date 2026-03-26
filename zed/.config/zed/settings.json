@@ -1,0 +1,46 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "theme": "Ayu Dark",
+  "soft_wrap": "editor_width",
+  "language_models": {
+    "anthropic": {}
+  },
+  "show_edit_predictions": false,
+  "vim_mode": true,
+  "ui_font_size": 13,
+  "buffer_font_family": "Monaspace Neon",
+  "ui_font_family": ".ZedMono",
+  "buffer_font_size": 12,
+  "autosave": "on_focus_change",
+  "languages": {
+    "Python": {
+      "formatter": {
+        "external": {
+          "command": "black",
+          "arguments": ["-"]
+        }
+      },
+      "format_on_save": "on"
+    }
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        "activate_script": "fish"
+      }
+    }
+  },
+  "agent": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6-latest"
+    }
+  }
+}
