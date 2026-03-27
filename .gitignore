@@ -38,3 +38,6 @@ ghostty/.config/ghostty/*.bak
 
 # Nvim plugin lock (changes frequently, machine-specific)
 nvim/.config/nvim/lazy-lock.json
+
+# Hammerspoon Spoons (downloadable, not user config)
+hammerspoon/.hammerspoon/Spoons/
