@@ -47,11 +47,6 @@ if vim.g.neovide then
   vim.cmd.cd(vim.env.HOME)
 end
 
--- configure rust file type plugin
--- https://neovim.io/doc/user/ft_rust.html
-vim.g.rustfmt_command = 'rustfmt'
-vim.g.rustfmt_autosave = true
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

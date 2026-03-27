@@ -88,18 +88,17 @@ return  {
 
       -- Additional lua configuration, makes nvim stuff amazing!
       -- Note that this needs to be loaded before lspconfig.setup.
-      { 'folke/neodev.nvim', opts = {} },
+      { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
 
       -- When the dependency is a string, we will use the spec defined elsewhere.
       'nvim-telescope/telescope.nvim',
 
-      'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
     },
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     config = function(_, _)
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       local mason_lspconfig = require'mason-lspconfig'
 
       mason_lspconfig.setup_handlers {

@@ -8,7 +8,7 @@ return {
     -- Git related plugins
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
-    'tpope/vim-surround',
+    { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {} },
 
     -- Detect tabstop and shiftwidth automatically
     'tpope/vim-sleuth',
@@ -61,7 +61,7 @@ return {
         opts = {
             options = {
                 icons_enabled = false,
-                theme = 'onedark',
+                theme = 'rose-pine',
                 component_separators = '|',
                 section_separators = '',
             },
@@ -77,16 +77,12 @@ return {
         opts = {},
     },
 
-    -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim', opts = {} },
-
     -- {
     --     'github/copilot.vim',
     --     build = ':Copilot setup',
     -- },
 
     -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, opt = { flavour = "frappe" }, config = function() vim.cmd.colorscheme "catppuccin" end },
-    { 'rust-lang/rust.vim' },
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --             These are some example plugins that I've included in the kickstart repository.
     --             Uncomment any of the lines below to enable them.
