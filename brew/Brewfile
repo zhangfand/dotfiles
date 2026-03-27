@@ -1,0 +1,63 @@
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+tap "homebrew/services"
+tap "koekeishiya/formulae"
+
+# System setup
+brew "fish"
+brew "koekeishiya/formulae/yabai"
+brew "mas" # this allows install App Store apps from homebrew
+brew "starship"
+
+# CLI tools
+brew "awscli"
+brew "bat"
+brew "curl"
+brew "exa"
+brew "fd"
+brew "fzf"
+brew "gh"
+brew "git-delta"
+brew "jq"
+brew "just"
+brew "just"
+brew "rg"
+brew "rsync"
+brew "sk"
+brew "telnet"
+brew "tldr"
+brew "tree"
+brew "wget"
+brew "zoxide"
+
+# Languages
+brew "go"
+brew "neovim"
+brew "nodejs"
+brew "python@3.12"
+brew "rustup"
+
+
+# Fonts
+cask "font-ibm-plex"
+cask "font-iosevka-ss15"
+cask "font-monaspace"
+
+# Apps
+cask "1password"
+cask "arc"
+cask "discord"
+cask "docker"
+cask "dropbox"
+cask "google-chrome"
+cask "hammerspoon"
+cask "iina"
+cask "kitty"
+cask "obsidian"
+cask "pdf-expert"
+cask "raycast"
+cask "tomatobar"
+cask "transmission"
+
+# App Store Apps
+mas "Things 3", id: 904280696
