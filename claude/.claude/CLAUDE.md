@@ -13,6 +13,7 @@
 - When spawning subprocesses, use `env_clear()` (or equivalent) and pass only explicitly needed env vars. Never inherit the full parent environment — it leaks secrets, git state, and other context that makes behavior non-reproducible across environments.
 - Never swallow errors silently. If an operation can fail, propagate the error to the caller. If there is a specific business reason to handle an error gracefully (e.g., fallback behavior, degraded mode), document the reason inline and emit telemetry (warning log or metric counter) so the error remains observable even when it's expected.
 - Never modify database state directly (raw SQL, REPL, etc.) during development or testing — always go through the application's CLI or API. Direct writes bypass validation and event sourcing, causing inconsistent state. If the tooling doesn't support what you need, that's a signal to add the missing command. Exception: deliberately simulating inconsistency scenarios in tests.
+- When designing systems, explicitly enumerate non-happy-path states for each component — don't wait to discover them in production. For each, ask: "does this violate a system invariant, or is it a state that can legitimately occur?" Invariant violations are bugs (fail loudly). Legitimate states get a designed handler (self-heal, ignore, or degrade). If you can't tell which it is, that's a sign the invariants aren't defined clearly enough.
 
 # Git
 
