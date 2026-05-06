@@ -10,22 +10,36 @@
       "Bash(gh api:*)",
       "Bash(gh repo:*)",
       "Bash(curl:*)",
-      "Bash(sqlite3:*)"
-    ]
+      "Bash(sqlite3:*)",
+      "mcp__obsidian__write_note",
+      "mcp__obsidian__search_notes",
+      "mcp__obsidian__read_note",
+      "mcp__obsidian__list_directory",
+      "mcp__obsidian__read_multiple_notes",
+      "mcp__obsidian__get_frontmatter",
+      "mcp__obsidian__patch_note",
+      "mcp__obsidian__manage_tags"
+    ],
+    "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
-    "command": "bash -c 'plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/opt/homebrew/bin/bun\" --env-file /dev/null \"${plugin_dir}src/index.ts\"'"
+    "command": "bash -c 'plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/opt/homebrew/bin/bun\" --env-file /dev/null \"${plugin_dir}src/index.ts\" --extra-cmd \"/Users/zhangfan/workspace/claude-code-plugins/pr-watch/hooks-handlers/hud-label.sh\"'"
   },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
     "frontend-design@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "linear@claude-plugins-official": true,
-    "claude-hud@claude-hud": true
+    "claude-hud@claude-hud": false,
+    "understand-anything@understand-anything": true,
+    "skill-creator@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "pr-watch@zhangfan-plugins": false
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -33,10 +47,23 @@
         "source": "github",
         "repo": "jarrodwatts/claude-hud"
       }
+    },
+    "understand-anything": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/Lum1104/Understand-Anything.git"
+      }
+    },
+    "zhangfan-plugins": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/zhangfan/workspace/claude-code-plugins"
+      }
     }
   },
-  "voiceEnabled": true,
   "autoDreamEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "model": "sonnet"
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
