@@ -5,6 +5,8 @@ eval "$(starship init zsh)"
 
 eval "$(zoxide init zsh)"
 
+eval "$(direnv hook zsh)"
+
 source <(fzf --zsh)
 
 ###############
@@ -66,3 +68,7 @@ bindkey -e
 # These are just basic recommendations, set these to your liking!
 export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Route ssh-add, git, and other SSH_AUTH_SOCK consumers through 1Password's agent
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
