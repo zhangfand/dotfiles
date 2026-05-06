@@ -1,0 +1,29 @@
+# Forest Dusk Bright — Ghostty theme
+# Save to ~/.config/ghostty/themes/forest-dusk-bright
+# Then in your config: theme = forest-dusk-bright
+
+background = #0d1411
+foreground = #d4dcd1
+cursor-color = #e0bd75
+cursor-text = #0d1411
+selection-background = #243027
+selection-foreground = #d4dcd1
+
+# ANSI 0-7
+palette = 0=#0d1411
+palette = 1=#d68a83
+palette = 2=#9ebc92
+palette = 3=#dcbd7e
+palette = 4=#8db0c4
+palette = 5=#bda0c1
+palette = 6=#92beb4
+palette = 7=#d4dcd1
+# ANSI 8-15 (bright)
+palette = 8=#5a6961
+palette = 9=#e89d96
+palette = 10=#b3d0a6
+palette = 11=#ecce8e
+palette = 12=#a0c2d6
+palette = 13=#cdb1d2
+palette = 14=#a6d0c6
+palette = 15=#e8efe5

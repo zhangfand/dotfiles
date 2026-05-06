@@ -1,2 +1,4 @@
-font-family = Monaspace Neon
+font-family = "Sarasa Term SC Nerd"
+font-size = 15
 keybind = shift+enter=text:\x1b\r
+theme = Forest Dusk Bright
