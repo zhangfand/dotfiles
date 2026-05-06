@@ -15,9 +15,53 @@
 - Never modify database state directly (raw SQL, REPL, etc.) during development or testing — always go through the application's CLI or API. Direct writes bypass validation and event sourcing, causing inconsistent state. If the tooling doesn't support what you need, that's a signal to add the missing command. Exception: deliberately simulating inconsistency scenarios in tests.
 - When designing systems, explicitly enumerate non-happy-path states for each component — don't wait to discover them in production. For each, ask: "does this violate a system invariant, or is it a state that can legitimately occur?" Invariant violations are bugs (fail loudly). Legitimate states get a designed handler (self-heal, ignore, or degrade). If you can't tell which it is, that's a sign the invariants aren't defined clearly enough.
 
+# Response Style
+
+- Lead with the headline answer or recommendation. Skip preamble.
+- Default to high-level. Do not enumerate exhaustive options, large tables, or multi-section breakdowns unless asked.
+- One paragraph beats five bullets that say the same thing.
+- Cite file paths or `file:line` only when the user is about to act on them — not as decoration.
+- For brainstorm requests, list options one line each, not a paragraph each.
+- Offer to expand on specific parts rather than dumping everything upfront. The user can always ask for depth.
+
+## Design summaries: pyramid structure, observable-behavior framing
+When summarizing a design or implementation, structure the response as three short sections:
+
+Gist — the observable contract. What holds after success? What holds after failure? Frame in terms of what the user would see, run, or hit, not internal structure.
+Shape — the key abstractions and the concrete operations that produce the contract. Name the operations the user would care about existing (build, dependency install, migration, validation, commit, etc.) even when staying high-level. Omitting them hides whether you considered them.
+Worth a closer look — the one or two design decisions that aren't obvious: asymmetries, non-rollback steps, linearization points, places where the success path and observable state can diverge. This is where mechanics earn their place — mention atomic-rename, staging dirs, or stage ordering only when they're the answer to "how is that observable property guaranteed?" or when the choice itself is the interesting part.
+
+Don't enumerate pipelines stage by stage. Don't draw ASCII state machines unless the state space is genuinely the design. Don't pad with tables where most rows say the same thing. Trust the reader to know standard patterns (atomic rename, content-addressed caching, supervision trees) by name; spend tokens on what's specific to this design.
+Length target: roughly three paragraphs. If a section wants to grow past that, it's probably mechanics leaking into shape — push them down to "closer look" or cut them.
+
+# Debugging
+
+- When debugging, run the failing command or test yourself and analyze the output directly. Do not ask the user to reproduce the issue and relay symptoms back to you.
+
 # Git
 
 - Use semantic commit messages (e.g., `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`).
+
+# Pull Requests
+
+Default PR description template, in this order:
+
+1. `## What this PR does` — open with the *problem* (what was missing, broken, or accreted), not with what changed. Narrative paragraph(s), then optionally a numbered "this PR ships:" list of 3–5 high-level shifts. Not a bulleted "summary of changes".
+2. `## Architecture` — ASCII diagram of the data/control flow, followed by a short list of load-bearing concepts surfaced as code with concrete identifiers (function names, flags, fields).
+3. `## How to use it (dev)` — real shell commands, real env vars, real URLs. Use a table when there's a matrix of paths to exercise.
+4. `## Where to look` — annotated file pointers, one line each: backticked path, then a short description of what's inside.
+5. Optional domain section — `## Prod contract`, `## Channel coverage`, etc. — anything capturing a contract or matrix specific to the change.
+6. `## Test plan` — checklist with `[x]` for verified, `[ ]` for remaining (often manual steps).
+7. `## Not in this PR` — bulleted explicit deferrals; each item names the deferred thing and a one-clause reason or pointer.
+
+Tone:
+- Concrete identifiers beat hand-waving. "`enqueueSessionTask` drains any active stream and emits `done`" beats "manages stream lifecycle".
+- Tables when there's a matrix (channels, env vars, paths).
+- Terse. No throat-clearing.
+
+End the body with a trailing line: `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
+
+Canonical example: PR #51 of `amantru/rome-internal` (`gh pr view 51 --repo amantru/rome-internal --json title,body`). Mirror its shape.
 
 # Project Scaffolding
 
