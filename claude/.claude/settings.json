@@ -39,7 +39,8 @@
     "understand-anything@understand-anything": true,
     "skill-creator@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "pr-watch@zhangfan-plugins": false
+    "pr-watch@zhangfan-plugins": false,
+    "zstack@zstack": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -59,6 +60,13 @@
         "source": "directory",
         "path": "/Users/zhangfan/workspace/claude-code-plugins"
       }
+    },
+    "zstack": {
+      "source": {
+        "source": "github",
+        "repo": "zhangfand/zstack"
+      },
+      "autoUpdate": true
     }
   },
   "autoDreamEnabled": true,
