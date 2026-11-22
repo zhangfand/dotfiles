@@ -1,42 +1,22 @@
-# CLAUDE.md
+# dotfiles
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+zhangfan's machine setup for macOS and Linux, managed with [chezmoi](https://www.chezmoi.io/). Agents make every change, and zhangfan reads them as PRs. `home/` is the chezmoi source directory (set by `.chezmoiroot`) and mirrors `$HOME`. Each machine keeps its clone at `~/.local/share/chezmoi`, and `~/.local/bin/dotfiles-update` pulls `main` into it every hour. A merged PR reaches every machine within the hour.
 
-## What This Is
+## Playbook
 
-A GNU Stow-based dotfiles repo. Each top-level directory is a "stow package" that mirrors `$HOME` structure. Running `stow <pkg>` symlinks the package's files into `$HOME`.
+- When changing any file, open a PR against `main` and leave the merge to zhangfan. Every merged change reaches every machine within the hour.
+- Before pushing, run `scripts/check`. It installs the repo into an empty `$HOME` and fails on a shell error, broken JSON, or a secret.
+- When adding a file from `$HOME`, run `chezmoi add <path>` so it gets the source name, then check that the file holds no secret.
+- When a setting differs between macOS and Linux, branch inside the file where its language can (`[[ -d /opt/homebrew ]]` in zsh). Use a chezmoi template (`.tmpl`) only where it cannot, or an entry in `home/.chezmoiignore` for a file one OS does not need.
+- When a SessionStart hook reports this machine's dotfiles differ from GitHub, commit the change on a branch in the clone, open a PR, then `git checkout main`. The updater skips a clone that is off `main` or has edits.
+- When asked which files in `$HOME` are not tracked yet, use the `dotfiles-discover-untracked` skill.
 
-## Commands
+## Traps
 
-```bash
-# Install all packages (idempotent)
-./install.sh
+**Source names are not target names.** `home/dot_zshrc` is `~/.zshrc`, and `executable_`, `private_` and `.tmpl` change how a file is written. Find a target's source with `chezmoi source-path <target>`, never by guessing.
 
-# Stow/unstow a single package
-stow -v --target="$HOME" <package>
-stow -D --target="$HOME" <package>
-```
+**Only plain files are links.** Templates, executables and private files are copies in `$HOME`, so an edit to the copy is lost on the next apply. Edit the source in `home/` and run `chezmoi apply`. `chezmoi status` lists copies that differ.
 
-## Packages
+**The repo is public.** A token in `settings.json`, an env block, or a shell export goes public on push. `scripts/check` runs gitleaks when it is installed, and CI always runs it.
 
-`brew`, `claude`, `gh`, `ghostty`, `git`, `hammerspoon`, `nvim`, `starship`, `zed`, `zsh`
-
-The canonical list is the `packages` array in `install.sh`.
-
-## Architecture
-
-- Each package directory's internal structure mirrors `$HOME`. For example, `nvim/.config/nvim/init.lua` symlinks to `~/.config/nvim/init.lua`.
-- Secrets and runtime state are excluded via `.gitignore` glob patterns (`**/*.secret`, `**/*credentials*`, `**/*token*`).
-- When adding a new package: create a directory mirroring the `$HOME` path, add it to the `packages` array in `install.sh`, update `.gitignore` to exclude any generated state or secrets, and update the table in `README.md`.
-
-## Neovim Config
-
-Lua-based config using `lazy.nvim` plugin manager. Entry point is `nvim/.config/nvim/init.lua` which loads modules from `lua/`:
-- `options.lua` — vim options
-- `keybindings.lua` — key mappings (leader is space)
-- `z.lua` — personal utilities
-- `plugins/` — lazy.nvim plugin specs (LSP, Telescope, Treesitter, completion, which-key)
-
-## Hammerspoon Config
-
-Entry point is `hammerspoon/.hammerspoon/init.lua`. Window management via yabai integration in `yabai.lua`.
+**A broken shell file breaks every machine within the hour.** `scripts/check` starts an interactive zsh in the empty `$HOME`, so a command that a fresh machine lacks has to be guarded with `(( $+commands[tool] ))`.

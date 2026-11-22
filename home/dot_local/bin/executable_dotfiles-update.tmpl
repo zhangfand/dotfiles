@@ -1,0 +1,19 @@
+#!/bin/sh
+# Pulls and applies the dotfiles from GitHub. The hourly timer runs it.
+# Skips while the clone has work of its own (edits, commits, another branch):
+# a pull that conflicted would leave conflict markers in live config files.
+chezmoi={{ .chezmoi.executable | quote }}
+repo=$("$chezmoi" git -- rev-parse --show-toplevel) || exit 1
+
+git -C "$repo" fetch --quiet origin || exit 1
+branch=$(git -C "$repo" symbolic-ref --short HEAD 2>/dev/null)
+if [ "$branch" != main ]; then
+    echo "dotfiles-update: skipped, clone is on '$branch', not main"; exit 0
+fi
+if [ -n "$(git -C "$repo" status --porcelain)" ]; then
+    echo "dotfiles-update: skipped, clone has uncommitted edits"; exit 0
+fi
+if [ -n "$(git -C "$repo" log --oneline origin/main..main)" ]; then
+    echo "dotfiles-update: skipped, clone has commits not on GitHub"; exit 0
+fi
+exec "$chezmoi" update --no-tty
