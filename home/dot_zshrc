@@ -14,6 +14,7 @@
 ###############
 
 # Completions
+[[ -d "$HOME/.grok/completions/zsh" ]] && fpath=("$HOME/.grok/completions/zsh" $fpath)
 autoload -U compinit
 compinit -C
 
@@ -73,3 +74,6 @@ export PATH="$HOME/.local/bin:$PATH"
 op_agent_sock="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 [[ -S "$op_agent_sock" ]] && export SSH_AUTH_SOCK="$op_agent_sock"
 unset op_agent_sock
+
+[[ -d "$HOME/.composio" ]] && export COMPOSIO_INSTALL_DIR="$HOME/.composio" && export PATH="$COMPOSIO_INSTALL_DIR:$PATH"
+[[ -d "$HOME/.grok/bin" ]] && export PATH="$HOME/.grok/bin:$PATH"
