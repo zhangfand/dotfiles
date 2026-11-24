@@ -1,0 +1,10 @@
+# Paths here are target paths in $HOME, not repo paths.
+.config/nvim/AGENTS.md
+{{ if ne .chezmoi.os "darwin" }}
+.Brewfile
+.hammerspoon
+Library
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.config/systemd
+{{ end }}

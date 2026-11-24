@@ -1,0 +1,16 @@
+#!/bin/sh
+# Starts the hourly `chezmoi update`. Reruns when a unit file changes.
+{{ if eq .chezmoi.os "linux" -}}
+# service: {{ include "dot_config/systemd/user/dotfiles-update.service" | sha256sum }}
+# timer: {{ include "dot_config/systemd/user/dotfiles-update.timer" | sha256sum }}
+if systemctl --user daemon-reload 2>/dev/null; then
+    systemctl --user enable --now dotfiles-update.timer
+else
+    echo "dotfiles: no systemd user session, so updates are not automatic. Run 'chezmoi update' by hand."
+fi
+{{ else if eq .chezmoi.os "darwin" -}}
+# plist: {{ include "Library/LaunchAgents/com.zhangfand.dotfiles-update.plist.tmpl" | sha256sum }}
+plist="$HOME/Library/LaunchAgents/com.zhangfand.dotfiles-update.plist"
+launchctl bootout "gui/$(id -u)" "$plist" 2>/dev/null || true
+launchctl bootstrap "gui/$(id -u)" "$plist"
+{{ end -}}

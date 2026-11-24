@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Installs these dotfiles into an empty temporary $HOME and checks the result.
+# Agents run it before pushing; CI runs it on macOS and Linux.
+set -euo pipefail
+
+repo=$(cd "$(dirname "$0")/.." && pwd)
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+export HOME="$tmp"
+fail() { echo "check: $*" >&2; exit 1; }
+
+echo "== fresh install into $tmp"
+chezmoi init --source "$repo" --apply --exclude scripts --no-tty
+
+echo "== shell files parse"
+for f in .zshrc .zshenv .zprofile; do zsh -n "$HOME/$f" || fail "$f does not parse"; done
+for f in $(git -C "$repo" ls-files '*.sh' '*.sh.tmpl' 'scripts/*'); do
+    [[ $f == *.tmpl ]] && continue
+    bash -n "$repo/$f" || fail "$f does not parse"
+done
+
+echo "== interactive zsh starts without errors"
+errors=$(zsh -i -c exit 2>&1 >/dev/null) || true
+[[ -z $errors ]] || fail "zsh -i printed errors:
+$errors"
+
+echo "== JSON parses"
+python3 -m json.tool "$HOME/.claude/settings.json" >/dev/null || fail ".claude/settings.json is not valid JSON"
+
+echo "== no secrets"
+if command -v gitleaks >/dev/null 2>&1; then
+    gitleaks dir --no-banner "$repo" || fail "gitleaks found a possible secret"
+else
+    echo "gitleaks not installed, skipped (CI runs it)"
+fi
+
+echo "check: ok"

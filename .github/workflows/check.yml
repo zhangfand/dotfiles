@@ -1,0 +1,36 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install zsh and chezmoi
+        run: |
+          if ! command -v zsh >/dev/null; then sudo apt-get update && sudo apt-get install -y zsh; fi
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      # Runner images ship group-writable zsh function dirs, and compinit
+      # refuses to load from them without a terminal to ask on.
+      - name: Secure zsh function dirs
+        run: zsh -c 'autoload -U compaudit; compaudit' | xargs -r sudo chmod g-w,o-w
+      - run: scripts/check
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

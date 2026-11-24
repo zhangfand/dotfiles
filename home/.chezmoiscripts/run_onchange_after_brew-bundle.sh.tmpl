@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Installs the Brewfile. Reruns when it changes: {{ include "dot_Brewfile" | sha256sum }}
+if command -v brew >/dev/null 2>&1; then
+    brew bundle --global
+else
+    echo "dotfiles: Homebrew is missing, so the Brewfile was skipped. Install it from https://brew.sh and run 'chezmoi apply'."
+fi
+{{ end -}}

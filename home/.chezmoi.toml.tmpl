@@ -1,0 +1,8 @@
+# Link files into $HOME instead of copying them, so an edit made in $HOME
+# lands in the repo clone. Templates, executables and private files are
+# still written as copies.
+mode = "symlink"
+
+[git]
+    autoCommit = false
+    autoPush = false
