@@ -35,7 +35,7 @@
   "model": "opus[1m]",
   "statusLine": {
     "type": "command",
-    "command": "bash -c 'plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/opt/homebrew/bin/bun\" --env-file /dev/null \"${plugin_dir}src/index.ts\" --extra-cmd \"/Users/zhangfan/workspace/claude-code-plugins/pr-watch/hooks-handlers/hud-label.sh\"'"
+    "command": "bash -c 'plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"$(command -v bun || echo /opt/homebrew/bin/bun)\" --env-file /dev/null \"${plugin_dir}src/index.ts\" --extra-cmd \"$HOME/workspace/claude-code-plugins/pr-watch/hooks-handlers/hud-label.sh\"'"
   },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
@@ -49,7 +49,6 @@
     "understand-anything@understand-anything": true,
     "skill-creator@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "pr-watch@zhangfan-plugins": false,
     "zstack@zstack": true
   },
   "extraKnownMarketplaces": {
@@ -63,12 +62,6 @@
       "source": {
         "source": "git",
         "url": "https://github.com/Lum1104/Understand-Anything.git"
-      }
-    },
-    "zhangfan-plugins": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/zhangfan/workspace/claude-code-plugins"
       }
     },
     "zstack": {
