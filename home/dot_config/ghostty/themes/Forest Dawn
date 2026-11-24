@@ -1,0 +1,29 @@
+# Forest Dawn — Ghostty theme
+# Save to ~/.config/ghostty/themes/forest-dawn
+# Then in your config: theme = forest-dawn
+
+background = #f2efe6
+foreground = #3a423a
+cursor-color = #a07c2a
+cursor-text = #f2efe6
+selection-background = #e3dfce
+selection-foreground = #3a423a
+
+# ANSI 0-7
+palette = 0=#3a423a
+palette = 1=#a8463c
+palette = 2=#566f3e
+palette = 3=#a07c2a
+palette = 4=#3a6480
+palette = 5=#7a4e7e
+palette = 6=#406d65
+palette = 7=#3a423a
+# ANSI 8-15 (bright)
+palette = 8=#7a8278
+palette = 9=#bb554a
+palette = 10=#6c8a4d
+palette = 11=#b5902f
+palette = 12=#4d7a96
+palette = 13=#8e5e93
+palette = 14=#52867c
+palette = 15=#22281f

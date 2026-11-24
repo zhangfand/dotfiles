@@ -7,6 +7,20 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "ssh_connections": [
+    {
+      "host": "devbox",
+      "username": "zhangfan",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/zhangfan/workspace/rome-internal/./"
+          ]
+        }
+      ]
+    }
+  ],
   "ui_font_weight": 400.0,
   "agent_ui_font_size": 15.0,
   "buffer_line_height": "comfortable",

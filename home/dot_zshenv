@@ -1,1 +1,23 @@
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+# macOS updates rewrite /etc/zshrc and drop the Nix installer's hook, and
+# /etc/zshenv sources it only over SSH. Sourcing it here survives OS updates
+# and runs before the direnv block below, which needs nix for nix-direnv.
+# nix-daemon.sh guards against a second source.
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+# Load the per-directory direnv environment in NON-interactive shells too.
+# Interactive shells get it via the `direnv hook zsh` line in .zshrc, which
+# refreshes on every prompt. Non-interactive shells (e.g. an agent's `zsh -c`,
+# scripts) skip .zshrc, so without this they inherit whatever env the parent
+# process had frozen at launch — and never refresh it. That snapshot lives in
+# the inherited DIRENV_DIFF/WATCHES; direnv trusts it and exports nothing, so a
+# tool added to the devShell after launch stays invisible. Drop the inherited
+# direnv state first so the export recomputes from the CURRENT directory's
+# .envrc authoritatively. nix-direnv caches the flake build, so this is cheap.
+if [[ ! -o interactive ]] && command -v direnv >/dev/null 2>&1; then
+  unset DIRENV_DIR DIRENV_DIFF DIRENV_WATCHES DIRENV_FILE
+  emulate zsh -c "$(direnv export zsh 2>/dev/null)"
+fi
