@@ -1,5 +1,5 @@
 # Paths here are target paths in $HOME, not repo paths.
-.config/nvim/CLAUDE.md
+.config/nvim/AGENTS.md
 {{ if ne .chezmoi.os "darwin" }}
 .Brewfile
 .hammerspoon

@@ -17,7 +17,7 @@
 
 # Machine setup
 
-- When changing this machine's setup (shell, git, editor, Claude Code or other tool config in `$HOME`), change it in the dotfiles repo at `$(chezmoi source-path)/..` and follow that repo's CLAUDE.md. An edit made only in `$HOME` stays on this machine.
+- When changing this machine's setup (shell, git, editor, Claude Code or other tool config in `$HOME`), change it in the dotfiles repo at `$(chezmoi source-path)/..` and follow that repo's AGENTS.md. An edit made only in `$HOME` stays on this machine.
 
 # Response Style
 

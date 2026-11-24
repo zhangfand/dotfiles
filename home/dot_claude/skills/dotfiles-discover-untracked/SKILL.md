@@ -25,4 +25,4 @@ Group the candidates by directory, one line each with a short reason. Then ask w
 
 ## Adopt
 
-For each picked item, run `chezmoi add <path>`, then follow the dotfiles repo's CLAUDE.md to check and open the PR.
+For each picked item, run `chezmoi add <path>`, then follow the dotfiles repo's AGENTS.md to check and open the PR.

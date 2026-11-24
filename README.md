@@ -19,4 +19,4 @@ This installs chezmoi, clones this repo to `~/.local/share/chezmoi`, links the f
 
 ## Changing something
 
-Ask an agent. The rules it follows are in [CLAUDE.md](CLAUDE.md).
+Ask an agent. The rules it follows are in [AGENTS.md](AGENTS.md).
