@@ -18,7 +18,17 @@
       "mcp__obsidian__read_multiple_notes",
       "mcp__obsidian__get_frontmatter",
       "mcp__obsidian__patch_note",
-      "mcp__obsidian__manage_tags"
+      "mcp__obsidian__manage_tags",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(bun run:*)",
+      "Bash(bun test:*)",
+      "Bash(uv run:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)"
     ],
     "defaultMode": "auto"
   },
